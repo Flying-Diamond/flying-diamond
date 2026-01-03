@@ -1,0 +1,1242 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FLYING DIAMOND — Профессиональная аэровидеосъёмка</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #0A7FD4;
+            --dark: #0D0D0D;
+            --light: #FFFFFF;
+            --gray: #D4D4D4;
+            --success: #00D966;
+            --warning: #FF6B35;
+            --dynamic: #9D4EDD;
+            --bg: #FFFFFF;
+            --text: #0D0D0D;
+            --text-secondary: #666666;
+            --border: #E0E0E0;
+        }
+
+        html[data-theme="dark"] {
+            --bg: #0D0D0D;
+            --text: #FFFFFF;
+            --text-secondary: #CCCCCC;
+            --border: #333333;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            transition: background-color 0.3s ease, color 0.3s ease;
+            line-height: 1.6;
+        }
+
+        /* HEADER / THEME TOGGLE */
+        header {
+            position: fixed;
+            top: 0;
+            right: 20px;
+            z-index: 1000;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .theme-toggle {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 2px solid var(--primary);
+            background: var(--bg);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            transition: all 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 15px rgba(10, 127, 212, 0.3);
+        }
+
+        /* HERO SECTION */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 100px 40px 60px;
+            text-align: center;
+            background: linear-gradient(135deg, var(--bg) 0%, rgba(10, 127, 212, 0.05) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(10, 127, 212, 0.1) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            max-width: 900px;
+        }
+
+        .logo-large {
+            font-size: 72px;
+            margin-bottom: 30px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 54px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, var(--primary), var(--dynamic));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .tagline {
+            font-size: 24px;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+        }
+
+        .hero-text {
+            font-size: 18px;
+            line-height: 1.8;
+            color: var(--text-secondary);
+            margin-bottom: 50px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* DIVIDER LINES */
+        .divider {
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--primary), transparent);
+            margin: 60px 0;
+            max-width: 300px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .divider-full {
+            height: 1px;
+            background: var(--border);
+            margin: 80px 0;
+        }
+
+        /* SECTION STYLES */
+        section {
+            padding: 80px 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        section h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: var(--text);
+        }
+
+        section > .subtitle {
+            font-size: 18px;
+            color: var(--text-secondary);
+            margin-bottom: 60px;
+            font-style: italic;
+        }
+
+        /* ABOUT SECTION */
+        .about {
+            background: linear-gradient(135deg, rgba(10, 127, 212, 0.05) 0%, transparent 100%);
+            border-left: 4px solid var(--primary);
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            margin-top: 40px;
+        }
+
+        .about-item h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+
+        .about-item p {
+            font-size: 16px;
+            line-height: 1.8;
+            color: var(--text-secondary);
+            margin-bottom: 15px;
+        }
+
+        /* SERVICES BLOCKS */
+        .services-section {
+            background: linear-gradient(135deg, rgba(157, 78, 221, 0.03) 0%, transparent 100%);
+        }
+
+        .block-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--primary);
+            margin: 80px 0 40px 0;
+            padding: 30px 0 20px 0;
+            border-top: 3px solid var(--primary);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .service-card {
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 25px;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        html[data-theme="dark"] .service-card {
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(10, 127, 212, 0.15);
+            border-color: var(--primary);
+        }
+
+        .service-card h4 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+
+        .service-card strong {
+            display: block;
+            font-size: 13px;
+            color: var(--text-secondary);
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .service-card p {
+            font-size: 15px;
+            line-height: 1.7;
+            color: var(--text-secondary);
+            margin-bottom: 15px;
+        }
+
+        .service-meta {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 20px;
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border);
+            font-size: 13px;
+        }
+
+        .meta-item {
+            color: var(--text-secondary);
+        }
+
+        .meta-label {
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 5px;
+        }
+
+        /* FOOTER */
+        footer {
+            background: linear-gradient(135deg, var(--dark) 0%, rgba(10, 127, 212, 0.1) 100%);
+            color: var(--light);
+            padding: 60px 40px;
+            text-align: center;
+            border-top: 3px solid var(--primary);
+        }
+
+        footer h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 30px;
+        }
+
+        .contacts {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .contact-item {
+            text-align: center;
+        }
+
+        .contact-item strong {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        .contact-item a {
+            color: var(--light);
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s ease;
+        }
+
+        .contact-item a:hover {
+            color: var(--primary);
+        }
+
+        .footer-bottom {
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 36px;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .service-meta {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+
+            .contacts {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .hero {
+                padding: 80px 20px 40px;
+            }
+
+            section {
+                padding: 60px 20px;
+            }
+
+            .tagline {
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <button class="theme-toggle" id="themeToggle" title="Переключить тему">🌙</button>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="logo-large">🛸</div>
+            <h1>FLYING DIAMOND</h1>
+            <p class="tagline">Профессиональная аэровидеосъёмка нового поколения</p>
+            <div class="divider"></div>
+            <p class="hero-text">Единственное агентство, сочетающее технологию пилотируемых FPV-систем со стандартами кинематографии. Мы создаём контент, который переопределяет восприятие масштаба, движения и инноваций.</p>
+            <p class="hero-text" style="color: var(--primary); font-size: 20px; font-weight: 600;">Кино в идеальном кадре</p>
+        </div>
+    </section>
+
+    <div class="divider-full"></div>
+
+    <!-- ABOUT SECTION -->
+    <section class="about">
+        <h2>О компании</h2>
+        <p class="subtitle">Наша миссия, видение и позиционирование</p>
+
+        <div class="about-grid">
+            <div class="about-item">
+                <h3>Миссия</h3>
+                <p>Демонстрировать возможности, которые были недоступны человечеству до появления контролируемых FPV-систем — пилотируемые в реальном времени полёты сквозь пространство и архитектуру, с точностью микроскопа и масштабом кино.</p>
+                <p>Наша цель: стать глобальным стандартом в кинематографической аэровизуализации, где каждый проект — это прорыв в восприятии.</p>
+            </div>
+
+            <div class="about-item">
+                <h3>Видение</h3>
+                <p>В ближайшие 3-5 лет FLYING DIAMOND станет разработчиком:</p>
+                <p>✓ Фирменного визуального языка для контента премиум-класса</p>
+                <p>✓ Технологических стандартов захвата движения в аэросъёмке</p>
+                <p>✓ Обучающих программ для кинематографистов нового поколения</p>
+                <p>✓ Интеграционных решений для синематических FPV-полётов в AR/VR-среде</p>
+            </div>
+        </div>
+
+        <div class="divider-full" style="margin: 60px 0;"></div>
+
+        <div class="about-grid">
+            <div class="about-item">
+                <h3>Позиционирование</h3>
+                <p><strong>Премиум-сегмент кинематографии.</strong> Мы конкурируем за проекты, где динамика — это реальное конкурентное преимущество, а не декоративная фишка.</p>
+                <p>Наша позиция:</p>
+                <p>🎬 <strong>Технология:</strong> Piloted FPV реального времени + 4K/6K запись</p>
+                <p>⚡ <strong>Скорость полёта:</strong> 80–120 км/ч (адаптивная)</p>
+                <p>🏗️ <strong>Недостижимые ракурсы:</strong> Сквозь узкие проёмы, внутри сооружений</p>
+                <p>📍 <strong>Точность маршрута:</strong> ±5см повторяемость</p>
+            </div>
+
+            <div class="about-item">
+                <h3>Что мы умеем кратко</h3>
+                <p>FLYING DIAMOND специализируется на:</p>
+                <p>✅ FPV-съёмка городских пространств и архитектуры</p>
+                <p>✅ Аэросъёмка мероприятий и событий</p>
+                <p>✅ Видео для недвижимости и девелопмента</p>
+                <p>✅ VR-контент и иммерсивные аттракционы</p>
+                <p>✅ Полный цикл видеопродакшна (идея → готовый ролик)</p>
+                <p>✅ Контент для ХОРЕКА, туризма и спортивных событий</p>
+                <p>✅ Консалтинг и долгосрочные партнёрства</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider-full"></div>
+
+    <!-- SERVICES SECTION -->
+    <section class="services-section">
+        <h2>Полный перечень услуг</h2>
+        <p class="subtitle">Все услуги FLYING DIAMOND, подробно и по темам</p>
+
+        <!-- BLOCK 1 -->
+        <h3 class="block-title">БЛОК 1: FPV И КЛАССИЧЕСКАЯ АЭРОСЪЁМКА</h3>
+
+        <div class="service-card">
+            <h4>FPV-видеосъёмка городских пространств (4K)</h4>
+            <strong>Услуга 1.1</strong>
+            <p>Профессиональная аэросъёмка городских локаций с использованием управляемых FPV-дронов. Получите уникальные ракурсы улиц, площадей, парков, набережных, мостов и архитектуры вашего города. Динамичные полёты со скоростью до 100 км/ч, точность повторяемости ±5см. Идеально для туристических промо, портфолио, социальных сетей и презентаций.</p>
+            <div class="service-meta">
+                <div class="meta-item"><div class="meta-label">Формат доставки:</div>MP4 4K (3840×2160), 1080p, вертикальные версии</div>
+                <div class="meta-item"><div class="meta-label">Сроки:</div>7–14 дней</div>
+                <div class="meta-item"><div class="meta-label">Цена:</div>20000–50000₽</div>
+            </div>
+        </div>
+
+        <div class="service-card">
+            <h4>FPV-съёмка торговых центров, офисов и отелей</h4>
+            <strong>Услуга 1.2</strong>
+            <p>Видеосъёмка внутренних и внешних пространств коммерческих объектов: торговых центров, бизнес-центров, отелей, ресторанов, баров и клубов. FPV-дроны позволяют снимать сквозь архитектурные элементы, создавая впечатляющие динамичные переходы. Съёмка отображает масштаб помещения, дизайн и атмосферу.</p>
+            <div class="service-meta">
+                <div class="meta-item"><div class="meta-label">Формат доставки:</div>MP4 4K/1080p, вертикальные версии для соцсетей</div>
+                <div class="meta-item"><div class="meta-label">Сроки:</div>5–10 дней</div>
+                <div class="meta-item"><div class="meta-label">Цена:</div>20000–60000₽</div>
+            </div>
+        </div>
+
+        <div class="service-card">
+            <h4>Аэросъёмка мероприятий (праздники, фестивали, концерты)</h4>
+            <strong>Услуга 1.3</strong>
+            <p>Профессиональная видеосъёмка городских событий с высоты: Новый год, дни города, фестивали, концерты, спортивные события, корпоративные праздники, митапы. FPV-съёмка захватывает масштаб события, толпы гостей, динамику и атмосферу. Получаете полный видеоролик + набор вертикальных клипов для соцсетей.</p>
+            <div class="service-meta">
+                <div class="meta-item"><div class="meta-label">Формат доставки:</div>Полный ролик + серия Shorts/Reels</div>
+                <div class="meta-item"><div class="meta-label">Сроки:</div>10–21 день</div>
+                <div class="meta-item"><div class="meta-label">Цена:</div>30000–100000₽</div>
+            </div>
+        </div>
+
+        <div class="service-card">
+            <h4>FPV-видеосъёмка стройплощадок и жилых комплексов</h4>
+            <strong>Услуга 1.4</strong>
+            <p>Видеодокументация строительства и девелопмента: ЖК, коттеджные посёлки, промышленные объекты. Получаете:</p>
+            <p>• Одноразовая съёмка (обзор объекта, ландшафт, окружение)</p>
+            <p>• Регулярная съёмка прогресса (construction progress) — ежемесячная или поквартальная съёмка с привязкой по датам</p>
+            <p>• Демонстрация масштаба, подходов, инфраструктуры</p>
+            <p>Идеально для инвесторов, покупателей и маркетинга девелопера.</p>
+            <div class="service-meta">
+                <div class="meta-item"><div class="meta-label">Формат доставки:</div>MP4 4K, пакет фотографий, временная шкала (timelapse)</div>
+                <div class="meta-item"><div class="meta-label">Сроки:</div>5–14 дней за одноразовую; абонентская модель за регулярную</div>
+                <div class="meta-item"><div class="meta-label">Цена:</div>30000–80000₽ за съёмку; 10000–15000₽/месяц за абонентское наблюдение</div>
+            </div>
+        </div>
+
+        <div class="service-card">
+            <h4>Видеосъёмка туристических маршрутов и достопримечательностей</h4>
+            <strong>Услуга 1.5</strong>
+            <p>Аэровизуализация туристических троп, набережных, смотровых площадок, речных линий и экскурсионных маршрутов. Отличный инструмент для туристических порталов, турфирм, музеев и местных властей. Покажите красоту локации потенциальным туристам с высоты.</p>
+            <div class="service-meta">
+                <div class="meta-item"><div class="meta-label">Формат доставки:</div>Полный ролик, серия коротких видео, 360°-тур (опционально)</div>
+                <div class="meta-item"><div class="meta-label">Сроки:</div>7–14 дней</div>
+                <div class="meta-item"><div class="meta-label">Цена:</div>25000–70000₽</div>
+            </div>
+        </div>
+
+        <div class="service-card">
+            <h4>Видеотур отеля: вид из окон, территория, инфраструктура</h4>
+            <strong>Услуга 1.6</strong>
+            <p>Профессиональное видеопрезентирование отеля, санатория или турбазы:</p>
+            <p>• Вид из номеров с высоты</p>
+            <p>• Обзор территории, парковок, подходов</p>
+            <p>• Показ инфраструктуры (бассейн, спа, ресторан, кино)</p>
+            <p>• Демонстрация окружения и локации</p>
+            <p>Помогает гостям выбрать номер и увеличивает бронирования на 20–40%.</p>
+            <div class="service-meta">
+                <div class="meta-item"><div class="meta-label">Формат доставки:</div>Полный видеотур + виртуальный тур 360° (опционально)</div>
+                <div class="meta-item"><div class="meta-label">Сроки:</div>5–10 дней</div>
+                <div class="meta-item"><div class="meta-label">Цена:</div>35000–75000₽</div>
+            </div>
+        </div>
+
+        <div class="service-card">
+            <h4>Промо-ролики маршрутов и туров (для ТВ, веб, соцсетей)</h4>
+            <strong>Услуга 1.7</strong>
+            <p>Создание привлекательных видеопрезентаций туристических маршрутов для туроператоров, турфирм и агрегаторов. Включает:</p>
+            <p>• Съёмка маршрута с земли и с воздуха (FPV + классические дроны)</p>
+            <p>• Динамичный видеоролик 1–3 минуты</p>
+            <p>• Серия коротких клипов для Instagram, TikTok, YouTube Shorts</p>
+            <p>Показывает красоту маршрута, масштаб объектов, удобство для туристов.</p>
+            <div class="service-meta">
+                <div class="meta-item"><div class="meta-label">Формат доставки:</div>ТВ-версия + соцсети-версии</div>
+                <div class="meta-item"><div class="meta-label">Сроки:</div>10–21 день</div>
+                <div class="meta-item"><div class="meta-label">Цена:</div>40000–120000₽</div>
+            </div>
+        </div>
+
+        <div class="service-card">
+            <h4>Спецпроект: "Город сверху", "Ночной Нижний", "Реки и мосты"</h4>
+            <strong>Услуга 1.8</strong>
+            <p>Создание тематических видеоматериалов под конкретную идею:</p>
+            <p>• "Город сверху" — панорамный обзор городской планировки</p>
+            <p>• "Ночной город" — полёты над подсвеченной архитектурой и событиями</p>
+            <p>• "Реки и мосты" — динамичная съёмка водных артерий и переправ</p>
+            <p>• "Золотой час" — закат и восход с уникальными ракурсами</p>
+            <p>• "Индустриальные зоны" — производство, логистика, инфраструктура</p>
+            <p>Идеально для имиджевых роликов города, областных властей, инвесторов.</p>
+            <div class="service-meta">
+                <div class="meta-item"><div class="meta-label">Формат доставки:</div>Полный ролик + набор коротких клипов</div>
+                <div class="meta-item"><div class="meta-label">Сроки:</div>14–28 дней</div>
+                <div class="meta-item"><div class="meta-label">Цена:</div>50000–150000₽</div>
+            </div>
+        </div>
+
+        <div class="service-card">
+            <h4>FPV-съёмка для кино, сериалов и рекламных продакшенов</h4>
+            <strong>Услуга 1.9</strong>
+            <p>Встроенные FPV-сцены для художественных фильмов, сериалов, музыкальных клипов и рекламных роликов. Предоставляем:</p>
+            <p>• Сложные динамичные пролёты, трюковые ракурсы</p>
+            <p>• Синхронизацию с актёрами и декорациями</p>
+            <p>• Постпродакшн-готовый материал (цвет, масштабирование)</p>
+            <p>• Работа в составе большого продакшена</p>
+            <p>Требуется предварительная синхронизация с режиссёром и локацией.</p>
+            <div class="service-meta">
+                <div class="meta-item"><div class="meta-label">Формат доставки:</div>RAW (при необходимости) или готовые клипы</div>
+                <div class="meta-item"><div class="meta-label">Сроки:</div>По договору (обычно 14–42 дня)</div>
+                <div class="meta-item"><div class="meta-label">Цена:</div>60000–150000₽ за блок работ</div>
+            </div>
+        </div>
+
+        <div class="service-card">
+            <h4>Съёмка спорта и экстремальных активностей (дрифт, вело, гонки)</h4>
+            <strong>Услуга 1.10</strong>
+            <p>Динамичная видеосъёмка спортивных мероприятий, гонок и экстремальных активностей:</p>
+            <p>• Дрифт и тест-драйвы автомобилей</p>
+            <p>• Велосипедные трассы и MTB-споты</p>
+            <p>• Горнолыжные спуски и сноуборд-парки</p>
+            <p>• Забеги и марафоны</p>
+            <p>• Соревнования и тренировки</p>
+            <p>FPV-дрон ловит динамику и адреналин события. Идеально для спортивных блогов, федераций и спонсоров.</p>
+            <div class="service-meta">
+                <div class="meta-item"><div class="meta-label">Формат доставки:</div>Полный ролик + клипы для соцсетей</div>
+                <div class="meta-item"><div class="meta-label">Сроки:</div>7–21 день</div>
+                <div class="meta-item"><div class="meta-label">Цена:</div>25000–100000₽</div>
+            </div>
+        </div>
+
+        <!-- BLOCK 2 -->
+        <h3 class="block-title">БЛОК 2: СПЕЦИАЛИЗИРОВАННЫЕ ЗИМНИЕ И ЭКСТРЕМАЛЬНЫЕ ФОРМАТЫ</h3>
+
+        <div class="service-card">
+            <h4>Видео-портрет: клуб зимнего плавания и морских путешествий</h4>
+            <strong>Услуга 2.1</strong>
+            <p>Специальное видео для моржей и клубов зимнего плавания:</p>
+            <p>• Персональные истории участников (с их согласия)</p>
+            <p>• Промо-ролики для клубов и сообществ</p>
+            <p>• Репортажи с заплывов и мероприятий</p>
+            <p>• Атмосферные кадры зимних активностей</p>
+            <p>Показывает мужество, община и красоту зимней стихии. Идеально для соцсетей, привлечения новых участников.</p>
+            <div class="service-meta">
+                <div class="meta-item"><div class="meta-label">Формат доставки:</div>Полный ролик + клипы для соцсетей</div>
+                <div class="meta-item"><div class="meta-label">Сроки:</div>10–21 день</div>
+                <div class="meta-item"><div class="meta-label">Цена:</div>20000–60000₽</div>
+            </div>
+        </div>
+
+        <div class="service-card">
+            <h4>Зимний промо-ролик: горки, катки, ярмарки, турбазы</h4>
+            <strong>Услуга 2.2</strong>
+            <p>Видеопромоция зимних активностей для турбаз, горнолыжных курортов, ледяных катков, зимних парков и новогодних ярмарок:</p>
+            <p>• Атмосфера снежной красоты</p>
+            <p>• Людская активность (катание, развлечения)</p>
+            <p>• Инфраструктура (подъёмники, кафе, отели)</p>
+            <p>• Динамичная музыка и эффекты</p>
+            <p>Привлекает туристов в зимний сезон, демонстрирует предложение.</p>
+            <div class="service-meta">
+                <div class="meta-item"><div class="meta-label">Формат доставки:</div>Полный ролик + вертикальные версии</div>
+                <div class="meta-item"><div class="meta-label">Сроки:</div>7–21 день</div>
+                <div class="meta-item"><div class="meta-label">Цена:</div>25000–75000₽</div>
+            </div>
+        </div>
+
+        <div class="service-card">
+            <h4>Экстремальный спортивный контент (горные лыжи, сноуборд, паркур)</h4>
+            <strong>Услуга 2.3</strong>
+            <p>Захватывающая видеосъёмка экстремальных и спортивных активностей:</p>
+            <p>• Горнолыжные спуски и фристайл</p>
+            <p>• Сноуборд-трюки</p>
+            <p>• Велосипедные дропы и трассы</p>
+            <p>• Паркур и городской экстрим</p>
+            <p>• Парашютный спорт (если согласовано)</p>
+            <p>FPV-дрон следит за спортсменом, создавая ощущение скорости и опасности. Идеально для спортивных медиа, YouTube-блогов, федераций.</p>
+            <div class="service-meta">
+                <div class="meta-item"><div class="meta-label">Формат доставки:</div>Полный ролик + клипы для соцсетей</div>
+                <div class="meta-item"><div class="meta-label">Сроки:</div>14–28 дней</div>
+                <div class="meta-item"><div class="meta-label">Цена:</div>30000–120000₽</div>
+            </div>
+        </div>
+
+        <div class="service-card">
+            <h4>Зимний фильм о городе (подсветка, салюты, праздники)</h4>
+            <strong>Услуга 2.4</strong>
+            <p>Кинематографическое полотно зимнего города:</p>
+            <p>• Ночная подсветка архитектуры</p>
+            <p>• Салюты и праздничные огни</p>
+            <p>• Уличные активности (кольцевое катание, ёлочные базары)</p>
+            <p>• Снежные пейзажи и "зимний Нижний" как визуальный бренд</p>
+            <p>Идеально для туристических кампаний, имиджевых роликов города и области.</p>
+            <div class="service-meta">
+                <div class="meta-item"><div class="meta-label">Формат доставки:</div>Полный ролик (1–3 мин) + вертикальные версии</div>
+                <div class="meta-item"><div class="meta-label">Сроки:</div>14–28 дней</div>
+                <div class="meta-item"><div class="meta-label">Цена:</div>40000–120000₽</div>
+            </div>
+        </div>
+
+        <!-- BLOCK 3 -->
+        <h3 class="block-title">БЛОК 3: ВИДЕОПРОДАКШН И КОНТЕНТ-ПАКЕТЫ</h3>
+
+        <div class="service-card">
+            <h4>Полный видеопродакшн: сценарий, съёмка, монтаж, звук</h4>
+            <strong>Услуга 3.1</strong>
+            <p>Комплексный видеопроект от идеи до готового ролика:</p>
+            <p>✓ Разработка сценария и концепции</p>
+            <p>✓ Подготовка локаций и авторизация съёмок</p>
+            <p>✓ Съёмка: FPV-дроны + классические камеры + наземная съёмка</p>
+            <p>✓ Профессиональный монтаж и цветокоррекция</p>
+            <p>✓ Подбор музыки и работа со звуком</p>
+            <p>✓ Наложение субтитров, титров, графики</p>
+            <p>✓ Подготовка под разные платформы (YouTube, соцсети, ТВ)</p>
+            <p>Результат: готовый видеоролик высочайшего качества, готовый к публикации везде.</p>
+            <div class="service-meta">
+                <div class="meta-item"><div class="meta-label">Формат доставки:</div>MP4 4K, все вертикальные версии, HD-версия</div>
+                <div class="meta-item"><div class="meta-label">Сроки:</div>21–42 дня (зависит от сложности)</div>
+                <div class="meta-item"><div class="meta-label">Цена:</div>80000–250000₽</div>
+            </div>
+        </div>
+
+        <div class="service-card">
+            <h4>Серия вертикальных видео: Reels, Shorts, TikTok (10–30 шт)</h4>
+            <strong>Услуга 3.2</strong>
+            <p>Создание пакета вертикальных видеоклипов для социальных сетей за одну съёмку:</p>
+            <p>• Съёмка на одной локации или событии</p>
+            <p>• 10–30 уникальных клипов (15–60 сек каждый)</p>
+            <p>• Разные ракурсы, музыка, стиль монтажа</p>
+            <p>• Готовые к публикации на Instagram Reels, YouTube Shorts, TikTok, VK Клипы</p>
+            <p>• Разные форматы: 9:16, привлекающие внимание, с CTA</p>
+            <p>Экономичный способ получить месячное заполнение соцсетей за один день съёмки.</p>
+            <div class="service-meta">
+                <div class="meta-item"><div class="meta-label">Формат доставки:</div>ZIP с 10–30 MP4-файлами (1080×1920)</div>
+                <div class="meta-item"><div class="meta-label">Сроки:</div>7–14 дней</div>
+                <div class="meta-item"><div class="meta-label">Цена:</div>20000–60000₽</div>
+            </div>
+        </div>
+
+        <div class="service-card">
+            <h4>Контент-пакет для туристических сайтов (серии роликов 30–60 сек)</h4>
+            <strong>Услуга 3.3</strong>
+            <p>Подготовка видеоконтента для размещения на туристических сайтах, агрегаторах и информационных порталах (Booking, Tripadvisor, NN-GRAD, Visit Nizhny, туристические сайты):</p>
+            <p>• 5–10 видеороликов 30–60 секунд каждый</p>
+            <p>• Разные тематики (достопримечательность, отель, маршрут, событие)</p>
+            <p>• Оптимизация под веб (разные разрешения)</p>
+            <p>• Подготовка для вставки на сайты</p>
+            <p>• Метаданные и SEO-описания</p>
+            <p>Помогает туристическому сайту привлечь больше посетителей и забронировать больше туров.</p>
+            <div class="service-meta">
+                <div class="meta-item"><div class="meta-label">Формат доставки:</div>Серия MP4, готовые к вставке на сайт</div>
+                <div class="meta-item"><div class="meta-label">Сроки:</div>10–21 день</div>
+                <div class="meta-item"><div class="meta-label">Цена:</div>30000–100000₽</div>
+            </div>
+        </div>
+
+        <div class="service-card">
+            <h4>Корпоративный ролик с логотипом, интро, фирменным стилем</h4>
+            <strong>Услуга 3.4</strong>
+            <p>Создание видеоролика под фирменный стиль и бренд-гайдлайны заказчика:</p>
+            <p>• Вставка логотипов и фирменной графики</p>
+            <p>• Создание интро/аутро в брендовом стиле</p>
+            <p>• Адаптация цветовой палитры под бренд</p>
+            <p>• Подготовка под фирменный канал (YouTube, ТВ, сайт)</p>
+            <p>• Разные языковые версии (озвучка/субтитры на EN, DE и др.)</p>
+            <p>Подходит для компаний, отелей, девелоперов, региональных проектов.</p>
+            <div class="service-meta">
+                <div class="meta-item"><div class="meta-label">Формат доставки:</div>MP4 в брендовом стиле + все вертикальные версии</div>
+                <div class="meta-item"><div class="meta-label">Сроки:</div>10–21 день</div>
+                <div class="meta-item"><div class="meta-label">Цена:</div>40000–120000₽</div>
+            </div>
+        </div>
+
+        <!-- BLOCK 4 -->
+        <h3 class="block-title">БЛОК 4: КОНТЕНТ ДЛЯ ХОРЕКА И СОБЫТИЙНОГО БИЗНЕСА</h3>
+
+        <div class="service-card">
+            <h4>Новогодний промо-ролик: атмосфера, кухня, программа вечера</h4>
+            <strong>Услуга 4.1</strong>
+            <p>Специальный видеоролик для ресторана, кафе, бара или event-площадки на Новый год:</p>
+            <p>• Съёмка атмосферы (декоры, свечи, праздничные элементы)</p>
+            <p>• Демонстрация кулинарных блюд</p>
+            <p>• Показ программы вечера (развлечения, DJ, выступления)</p>
+            <p>• Интервью с гостями или владельцами</p>
+            <p>• Динамичный монтаж под праздничную музыку</p>
+            <p>Помогает заведению привлечь гостей, увеличить бронирования.</p>
+            <div class="service-meta">
+                <div class="meta-item"><div class="meta-label">Формат доставки:</div>Полный ролик + клипы для соцсетей</div>
+                <div class="meta-item"><div class="meta-label">Сроки:</div>7–14 дней</div>
+                <div class="meta-item"><div class="meta-label">Цена:</div>30000–80000₽</div>
+            </div>
+        </div>
+
+        <div class="service-card">
+            <h4>Месячное наполнение соцсетей: "30 клипов за один день съёмки"</h4>
+            <strong>Услуга 4.2</strong>
+            <p>Экономичный пакет для ресторана, бара, клуба или event-площадки:</p>
+            <p>• Одна смена съёмки (4–6 часов)</p>
+            <p>• Создание 25–35 готовых видеоклипов (вертикальные Reels/TikTok/Shorts)</p>
+            <p>• Разные форматы: еда, гости, атмосфера, закулисье, спецпредложения</p>
+            <p>• Готовые к публикации на Instagram, TikTok, VK, YouTube</p>
+            <p>• Чек-лист для SMM-специалиста (какой пост когда публиковать)</p>
+            <p>Экономит время на контент-планирование и привлекает больше клиентов через соцсети.</p>
+            <div class="service-meta">
+                <div class="meta-item"><div class="meta-label">Формат доставки:</div>ZIP с 25–35 MP4-файлами</div>
+                <div class="meta-item"><div class="meta-label">Сроки:</div>5–7 дней</div>
+                <div class="meta-item"><div class="meta-label">Цена:</div>25000–70000₽</div>
+            </div>
+        </div>
+
+        <div class="service-card">
+            <h4>Комплексное видеопрезентирование отеля (номера, территория, сервис)</h4>
+            <strong>Услуга 4.3</strong>
+            <p>Полное видеопрезентирование отеля, санатория или турбазы для увеличения бронирований:</p>
+            <p>• Съёмка номеров разных категорий (вид из окна, интерьер, удобства)</p>
+            <p>• Обзор общественных зон (холл, ресторан, спа, бассейн, кино)</p>
+            <p>• Демонстрация уличной инфраструктуры (парковка, подходы, сад)</p>
+            <p>• Интервью с владельцами или гостями</p>
+            <p>• Финальный монтаж с музыкой и воодушевляющим текстом</p>
+            <p>Размещается на сайте отеля, Booking, социальных сетях. Увеличивает бронирования на 20–40%.</p>
+            <div class="service-meta">
+                <div class="meta-item"><div class="meta-label">Формат доставки:</div>Полный ролик + набор клипов</div>
+                <div class="meta-item"><div class="meta-label">Сроки:</div>10–21 день</div>
+                <div class="meta-item"><div class="meta-label">Цена:</div>40000–150000₽</div>
+            </div>
+        </div>
+
+        <!-- BLOCK 5 -->
+        <h3 class="block-title">БЛОК 5: VR-АТТРАКЦИОНЫ И ИММЕРСИВНЫЙ ОПЫТ</h3>
+
+        <div class="service-card">
+            <h4>VR-контент: запись полётов для виртуальной реальности (очки VR)</h4>
+            <strong>Услуга 5.1</strong>
+            <p>Создание видеоконтента специально для VR-очков и аттракционов:</p>
+            <p>• Запись коротких FPV-полётов (2–5 минут) над городом или маршрутом</p>
+            <p>• Тематические маршруты: "ночной город", "зимний Нижний", "туристический маршрут"</p>
+            <p>• Съёмка в формате 4K для максимальной реалистичности</p>
+            <p>• Оптимизация видео под VR-шлемы (формат, битрейт, синхронизация)</p>
+            <p>• Готовое видео для загрузки на VR-платформы</p>
+            <p>Потребители получают ощущение полёта без риска. Идеально для отелей, парков развлечений, музеев.</p>
+            <div class="service-meta">
+                <div class="meta-item"><div class="meta-label">Формат доставки:</div>MP4 в VR-формате (180° или 360°)</div>
+                <div class="meta-item"><div class="meta-label">Сроки:</div>7–21 день</div>
+                <div class="meta-item"><div class="meta-label">Цена:</div>30000–100000₽</div>
+            </div>
+        </div>
+
+        <div class="service-card">
+            <h4>VR-аттракцион "полёт над городом": установка и управление</h4>
+            <strong>Услуга 5.2</strong>
+            <p>Комплексное решение для открытия VR-аттракциона в вашем учреждении:</p>
+            <p>✓ Подбор и подготовка видеоконтента (маршруты, продолжительность)</p>
+            <p>✓ Консультация по подбору оборудования (VR-очки, компьютеры)</p>
+            <p>✓ Установка и настройка в вашем месте (парк, ТЦ, отель, музей)</p>
+            <p>✓ Подготовка инструкций для гостей (на русском и английском)</p>
+            <p>✓ Обучение персонала</p>
+            <p>✓ Техническое сопровождение и обновление контента</p>
+            <p>✓ Сценарии использования (кому показывать, когда, как)</p>
+            <p>Результат: готовый аттракцион, который привлекает гостей и генерирует доход.</p>
+            <div class="service-meta">
+                <div class="meta-item"><div class="meta-label">Формат доставки:</div>Установка на месте + документация + обучение</div>
+                <div class="meta-item"><div class="meta-label">Сроки:</div>14–28 дней</div>
+                <div class="meta-item"><div class="meta-label">Цена:</div>150000–500000₽ (зависит от оборудования и наполнения)</div>
+            </div>
+        </div>
+
+        <div class="service-card">
+            <h4>Лицензирование VR-контента (абонентская модель для аттракционов)</h4>
+            <strong>Услуга 5.3</strong>
+            <p>Лицензирование готовых VR-видеомаршрутов под абонентскую модель или revenue-share:</p>
+            <p>• Готовые маршруты: "ночной город", "зимний Нижний", "туристический тур", "прогулка по рекам"</p>
+            <p>• Ежемесячные обновления контента (новые маршруты, праздничные версии)</p>
+            <p>• Техническая поддержка и обновления формата под вашу VR-платформу</p>
+            <p>• Гибкие модели оплаты: фиксированная абонентская плата или revenue-share (процент от продаж)</p>
+            <p>Подходит для парков, отелей, музеев, ТЦ, временных событий.</p>
+            <div class="service-meta">
+                <div class="meta-item"><div class="meta-label">Формат доставки:</div>Доступ к видео-библиотеке через облако или локальное хранилище</div>
+                <div class="meta-item"><div class="meta-label">Сроки:</div>Подключение в течение 3–5 дней</div>
+                <div class="meta-item"><div class="meta-label">Цена:</div>5000–15000₽/месяц (в зависимости от модели)</div>
+            </div>
+        </div>
+
+        <!-- BLOCK 6 -->
+        <h3 class="block-title">БЛОК 6: ПОСТПРОДАКШН И УПАКОВКА</h3>
+
+        <div class="service-card">
+            <h4>Монтаж и цветокоррекция видеоматериала (FPV, дроны, наземная съёмка)</h4>
+            <strong>Услуга 6.1</strong>
+            <p>Профессиональный постпродакшн ваших видеоматериалов:</p>
+            <p>• Сортировка и логирование отснятого материала</p>
+            <p>• Черновой и финальный монтаж</p>
+            <p>• Цветокоррекция (градация, контрастность, насыщенность)</p>
+            <p>• Стилизация под фирменный кинематографический стиль</p>
+            <p>• Синхронизация звука и видео</p>
+            <p>• Финальная проверка качества</p>
+            <p>Результат: готовый видеоролик кинематографического качества.</p>
+            <div class="service-meta">
+                <div class="meta-item"><div class="meta-label">Формат доставки:</div>MP4 в разных разрешениях (4K, 1080p, мобильный)</div>
+                <div class="meta-item"><div class="meta-label">Сроки:</div>5–14 дней (зависит от объёма)</div>
+                <div class="meta-item"><div class="meta-label">Цена:</div>25000–50000₽</div>
+            </div>
+        </div>
+
+        <div class="service-card">
+            <h4>Звук для видео: музыка, саунддизайн, озвучка, субтитры</h4>
+            <strong>Услуга 6.2</strong>
+            <p>Комплексное звуковое оформление видеороликов:</p>
+            <p>✓ Подбор и лицензирование музыки под сюжет</p>
+            <p>✓ Звуковой дизайн (эффекты, атмосфера, переходы)</p>
+            <p>✓ Работа с живым звуком (если есть)</p>
+            <p>✓ Озвучка закадровым текстом (голос актёра)</p>
+            <p>✓ Наложение русских и английских субтитров</p>
+            <p>✓ Балансировка уровней (музыка, речь, эффекты)</p>
+            <p>Звук — половина впечатления от видео. Мы делаем его на профессиональном уровне.</p>
+            <div class="service-meta">
+                <div class="meta-item"><div class="meta-label">Формат доставки:</div>MP4 с готовым звуком</div>
+                <div class="meta-item"><div class="meta-label">Сроки:</div>3–10 дней</div>
+                <div class="meta-item"><div class="meta-label">Цена:</div>10000–40000₽</div>
+            </div>
+        </div>
+
+        <div class="service-card">
+            <h4>Адаптация видео под платформы: YouTube, соцсети, ТВ, сайты</h4>
+            <strong>Услуга 6.3</strong>
+            <p>Подготовка видеоролика во всех необходимых форматах и разрешениях:</p>
+            <p>✓ Горизонтальная версия: 1920×1080 (YouTube, веб, ТВ)</p>
+            <p>✓ Вертикальные версии: 1080×1920 (Instagram Reels, TikTok, YouTube Shorts)</p>
+            <p>✓ Квадратная версия: 1080×1080 (Facebook, VK, Instagram Feed)</p>
+            <p>✓ Разные длительности: трейлер 6–15 сек, основная 30–60 сек, полная 1–5 минут</p>
+            <p>✓ Разные кодеки: MP4 (универсальный), MOV (для профессионалов)</p>
+            <p>✓ Мобильная оптимизация (меньший размер для быстрой загрузки)</p>
+            <p>Один видеоролик работает везде.</p>
+            <div class="service-meta">
+                <div class="meta-item"><div class="meta-label">Формат доставки:</div>ZIP со всеми версиями</div>
+                <div class="meta-item"><div class="meta-label">Сроки:</div>2–5 дней</div>
+                <div class="meta-item"><div class="meta-label">Цена:</div>10000–30000₽</div>
+            </div>
+        </div>
+
+        <div class="service-card">
+            <h4>Создание метаданных для YouTube, RuTube, VK (заголовки, теги, описания)</h4>
+            <strong>Услуга 6.4</strong>
+            <p>Подготовка полной информации для публикации видео на платформы:</p>
+            <p>✓ Оптимизированные заголовки (50–70 символов для SEO)</p>
+            <p>✓ Подробные описания с ключевыми словами</p>
+            <p>✓ Релевантные теги и хэштеги</p>
+            <p>✓ Структурирование плейлистов</p>
+            <p>✓ Настройка миниатюры (превью)</p>
+            <p>✓ Подготовка ссылок и CTA (call-to-action)</p>
+            <p>Видео найдётся в поиске и привлечёт нужную аудиторию.</p>
+            <div class="service-meta">
+                <div class="meta-item"><div class="meta-label">Формат доставки:</div>Текстовый файл со всей информацией + готовые заголовки и описания</div>
+                <div class="meta-item"><div class="meta-label">Сроки:</div>1–3 дня</div>
+                <div class="meta-item"><div class="meta-label">Цена:</div>5000–15000₽</div>
+            </div>
+        </div>
+
+        <div class="service-card">
+            <h4>Интерактивная HTML-презентация проекта (портфолио, кейс)</h4>
+            <strong>Услуга 6.5</strong>
+            <p>Создание красивой интерактивной HTML-страницы для презентации проекта:</p>
+            <p>✓ Встроенное видео</p>
+            <p>✓ Галерея фотографий</p>
+            <p>✓ Описание проекта и результатов</p>
+            <p>✓ Контактная информация</p>
+            <p>✓ Резюме (абстракт проекта)</p>
+            <p>✓ Дизайн в фирменном стиле FLYING DIAMOND</p>
+            <p>Используется для показа портфолио инвесторам, клиентам, партнёрам, властям.</p>
+            <div class="service-meta">
+                <div class="meta-item"><div class="meta-label">Формат доставки:</div>HTML-файл (готов к публикации на сайт или отправке по почте)</div>
+                <div class="meta-item"><div class="meta-label">Сроки:</div>3–7 дней</div>
+                <div class="meta-item"><div class="meta-label">Цена:</div>15000–40000₽</div>
+            </div>
+        </div>
+
+        <!-- BLOCK 7 -->
+        <h3 class="block-title">БЛОК 7: ЦИФРОВОЙ МАРКЕТИНГ И ДИСТРИБУЦИЯ</h3>
+
+        <div class="service-card">
+            <h4>Стратегия публикации видео на разные платформы</h4>
+            <strong>Услуга 7.1</strong>
+            <p>Разработка плана публикации вашего видеоконтента:</p>
+            <p>✓ Анализ целевой аудитории</p>
+            <p>✓ Выбор оптимальных платформ (YouTube, VK, TikTok, Instagram, RuTube, Telegram)</p>
+            <p>✓ Определение лучшего времени публикации</p>
+            <p>✓ Структурирование кампании (когда публиковать, в каком порядке)</p>
+            <p>✓ Подготовка описаний и хэштегов для каждой платформы</p>
+            <p>✓ Прогноз охватов и вовлечения</p>
+            <p>Результат: максимальный охват и вовлечение за счёт умной дистрибуции.</p>
+            <div class="service-meta">
+                <div class="meta-item"><div class="meta-label">Формат доставки:</div>Документ с планом + подготовленные описания и хэштеги</div>
+                <div class="meta-item"><div class="meta-label">Сроки:</div>2–5 дней</div>
+                <div class="meta-item"><div class="meta-label">Цена:</div>25000–60000₽</div>
+            </div>
+        </div>
+
+        <div class="service-card">
+            <h4>Контент-пакет: 30 вертикальных видео по тематике за месяц</h4>
+            <strong>Услуга 7.2</strong>
+            <p>Создание серии тематических видеоклипов на протяжении месяца:</p>
+            <p>✓ Съёмка по заранее составленному календарю (локации, события, темы)</p>
+            <p>✓ Создание 25–30 готовых видеоклипов (вертикальные 9:16 для Reels/Shorts/TikTok)</p>
+            <p>✓ Разные подтемы: "достопримечательность недели", "рецепт выходного", "событие месяца"</p>
+            <p>✓ Готовые к публикации с описаниями и хэштегами</p>
+            <p>✓ Расписание публикации (какой клип когда публиковать)</p>
+            <p>Клиент публикует готовые клипы — не тратит время на контент-планирование.</p>
+            <div class="service-meta">
+                <div class="meta-item"><div class="meta-label">Формат доставки:</div>ZIP с видео + spreadsheet с расписанием публикации</div>
+                <div class="meta-item"><div class="meta-label">Сроки:</div>14–28 дней</div>
+                <div class="meta-item"><div class="meta-label">Цена:</div>40000–120000₽</div>
+            </div>
+        </div>
+
+        <div class="service-card">
+            <h4>Спецпроект: контент для блогеров и лидеров мнений</h4>
+            <strong>Услуга 7.3</strong>
+            <p>Подготовка специальных видеоролей для travel-блогеров, food-блогеров и медиа-проектов:</p>
+            <p>✓ Съёмка с учётом стиля блогера</p>
+            <p>✓ Готовые к публикации в его канал (с его брендингом, если нужно)</p>
+            <p>✓ Рекомендация по хэштегам и описаниям</p>
+            <p>✓ Координация с блогером по времени публикации</p>
+            <p>✓ Отслеживание охватов и вовлечения</p>
+            <p>Блогеры получают качественный контент, вы получаете охват их аудитории.</p>
+            <div class="service-meta">
+                <div class="meta-item"><div class="meta-label">Формат доставки:</div>Видео + рекомендации по публикации</div>
+                <div class="meta-item"><div class="meta-label">Сроки:</div>5–14 дней</div>
+                <div class="meta-item"><div class="meta-label">Цена:</div>25000–150000₽</div>
+            </div>
+        </div>
+
+        <div class="service-card">
+            <h4>SEO-оптимизация видео: ключевые слова, структура, поисковая видимость</h4>
+            <strong>Услуга 7.4</strong>
+            <p>Оптимизация видеоконтента для поиска:</p>
+            <p>✓ Анализ ключевых слов (Google Trends, YouTube Search)</p>
+            <p>✓ Оптимизация заголовков и описаний</p>
+            <p>✓ Размещение ключевых слов в тегах и плейлистах</p>
+            <p>✓ Создание карточек и плейлистов для лучшей навигации</p>
+            <p>✓ Подготовка к индексации в Google (видеосайтмап и метаданные)</p>
+            <p>Результат: видео найдётся в поиске YouTube и Google, привлечёт органический трафик.</p>
+            <div class="service-meta">
+                <div class="meta-item"><div class="meta-label">Формат доставки:</div>Документ с рекомендациями + готовые оптимизированные заголовки и описания</div>
+                <div class="meta-item"><div class="meta-label">Сроки:</div>2–5 дней</div>
+                <div class="meta-item"><div class="meta-label">Цена:</div>15000–25000₽</div>
+            </div>
+        </div>
+
+        <!-- BLOCK 8 -->
+        <h3 class="block-title">БЛОК 8: КОНСАЛТИНГ И ПАРТНЁРСТВА</h3>
+
+        <div class="service-card">
+            <h4>Стратегический консалтинг: как использовать FPV и VR для вашего бизнеса</h4>
+            <strong>Услуга 8.1</strong>
+            <p>Консультация для компаний, властей, туроператоров и учреждений по внедрению FPV/VR:</p>
+            <p>✓ Анализ вашей задачи (туризм, имидж, образование, события)</p>
+            <p>✓ Рекомендации по форматам и технологиям</p>
+            <p>✓ Разработка концепции проекта</p>
+            <p>✓ Оценка сроков и бюджета</p>
+            <p>✓ Определение KPI и целей</p>
+            <p>✓ План реализации (шаги, сроки, ответственность)</p>
+            <p>Подходит для городских властей, девелоперов, туроператоров, медиакомпаний.</p>
+            <div class="service-meta">
+                <div class="meta-item"><div class="meta-label">Формат доставки:</div>Документ с рекомендациями + презентация + план действий</div>
+                <div class="meta-item"><div class="meta-label">Сроки:</div>3–7 дней</div>
+                <div class="meta-item"><div class="meta-label">Цена:</div>25000–60000₽</div>
+            </div>
+        </div>
+
+        <div class="service-card">
+            <h4>Контент-программа: матрица локаций, сезонов, форматов и KPI</h4>
+            <strong>Услуга 8.2</strong>
+            <p>Разработка долгосрочной программы создания видеоконтента:</p>
+            <p>✓ Анализ целевой аудитории и их интересов</p>
+            <p>✓ Определение целей (охват, вовлечение, конверсия, имидж)</p>
+            <p>✓ Создание матрицы локаций и событий на год</p>
+            <p>✓ Планирование по сезонам (что снимать когда)</p>
+            <p>✓ Выбор форматов и платформ</p>
+            <p>✓ Установление KPI и метрик успеха</p>
+            <p>✓ Календарный план съёмок и публикаций</p>
+            <p>Результат: чёткий план на год, который ваша команда может реализовывать.</p>
+            <div class="service-meta">
+                <div class="meta-item"><div class="meta-label">Формат доставки:</div>Документ + таблицы + презентация</div>
+                <div class="meta-item"><div class="meta-label">Сроки:</div>7–14 дней</div>
+                <div class="meta-item"><div class="meta-label">Цена:</div>40000–100000₽</div>
+            </div>
+        </div>
+
+        <div class="service-card">
+            <h4>Консалтинг по согласованиям и безопасности FPV-полётов</h4>
+            <strong>Услуга 8.3</strong>
+            <p>Помощь в навигации через регуляторные требования и согласования:</p>
+            <p>✓ Анализ требований МинРегБез (минобороны), ЕГОСВО, местной администрации</p>
+            <p>✓ Разработка маршрутов полёта с соблюдением ограничений</p>
+            <p>✓ Подготовка документации (заявления, согласия, страховки)</p>
+            <p>✓ Консультация по зонам полётов и ограничениям</p>
+            <p>✓ Типовые пакеты документов для разных типов съёмок</p>
+            <p>Помогает избежать проблем с юстицией и органами власти.</p>
+            <div class="service-meta">
+                <div class="meta-item"><div class="meta-label">Формат доставки:</div>Консультация + пакет документов</div>
+                <div class="meta-item"><div class="meta-label">Сроки:</div>5–14 дней</div>
+                <div class="meta-item"><div class="meta-label">Цена:</div>30000–80000₽</div>
+            </div>
+        </div>
+
+        <div class="service-card">
+            <h4>Консалтинг: подготовка заявок на гранты и пилоты (с видео)</h4>
+            <strong>Услуга 8.4</strong>
+            <p>Помощь организациям в подготовке заявок на гранты и программы развития:</p>
+            <p>✓ Анализ требований грантовой программы</p>
+            <p>✓ Разработка видеоматериалов для заявки (визуальное оформление идеи)</p>
+            <p>✓ Подготовка бюджета и KPI</p>
+            <p>✓ Написание описания проекта и видеовизуализации</p>
+            <p>✓ Подготовка презентаций для жюри</p>
+            <p>Помогает увеличить шансы на получение гранта.</p>
+            <div class="service-meta">
+                <div class="meta-item"><div class="meta-label">Формат доставки:</div>Видео + документация + презентация</div>
+                <div class="meta-item"><div class="meta-label">Сроки:</div>14–28 дней</div>
+                <div class="meta-item"><div class="meta-label">Цена:</div>50000–150000₽</div>
+            </div>
+        </div>
+
+        <div class="service-card">
+            <h4>Долгосрочный контракт: мы как ваша внешняя FPV-студия</h4>
+            <strong>Услуга 8.5</strong>
+            <p>Система долгосрочного сотрудничества (6–12 месяцев и более):</p>
+            <p>✓ Регулярные съёмки (еженедельные или ежемесячные)</p>
+            <p>✓ Постоянное пополнение видеобиблиотеки</p>
+            <p>✓ Интеграция с вашей командой (SMM, маркетинг, PR)</p>
+            <p>✓ Быстрый отклик на внезапные события и мероприятия</p>
+            <p>✓ Специальные условия (фиксированная цена за объём)</p>
+            <p>✓ Приоритет в расписании съёмок</p>
+            <p>Подходит для: города, туристических компаний, девелоперов, отелей, регионов.</p>
+            <div class="service-meta">
+                <div class="meta-item"><div class="meta-label">Формат доставки:</div>Абонентская модель с ежемесячными результатами</div>
+                <div class="meta-item"><div class="meta-label">Сроки:</div>От 6 месяцев</div>
+                <div class="meta-item"><div class="meta-label">Цена:</div>50000–150000₽/месяц (в зависимости от объёма)</div>
+            </div>
+        </div>
+
+        <!-- BLOCK 9 -->
+        <h3 class="block-title">БЛОК 9: ДОПОЛНИТЕЛЬНЫЕ УСЛУГИ</h3>
+
+        <div class="service-card">
+            <h4>Обучение: как снимать и монтировать видео для социальных сетей</h4>
+            <strong>Услуга Д1</strong>
+            <p>Однодневный или многодневный курс для вашей команды:</p>
+            <p>✓ Основы видеосъёмки со смартфона и камеры</p>
+            <p>✓ Использование дронов и FPV для получения уникальных кадров</p>
+            <p>✓ Основы монтажа (DaVinci Resolve, Adobe Premiere)</p>
+            <p>✓ Работа с метаданными и SEO для видео</p>
+            <p>✓ Публикация на разные платформы</p>
+            <p>✓ Кейсы и примеры успешных проектов</p>
+            <p>Ваша команда учится делать контент, экономит бюджет на внешних подрядчиков.</p>
+            <div class="service-meta">
+                <div class="meta-item"><div class="meta-label">Формат доставки:</div>Курс с материалами и сертификатом</div>
+                <div class="meta-item"><div class="meta-label">Сроки:</div>По договору</div>
+                <div class="meta-item"><div class="meta-label">Цена:</div>30000–80000₽ (в зависимости от глубины)</div>
+            </div>
+        </div>
+
+        <div class="service-card">
+            <h4>Аренда FPV-дронов и оборудования / техническое сопровождение</h4>
+            <strong>Услуга Д2</strong>
+            <p>Аренда оборудования для ваших проектов:</p>
+            <p>✓ FPV-дроны (суточная/еженедельная/ежемесячная аренда)</p>
+            <p>✓ Классические дроны DJI Inspire, Air и т.п.</p>
+            <p>✓ Стабилизаторы и крепления для камер</p>
+            <p>✓ VR-очки для тестирования контента</p>
+            <p>✓ Техническое сопровождение (демонстрация, консультация, помощь)</p>
+            <p>Подходит для компаний, которые хотят попробовать технологию перед покупкой.</p>
+            <div class="service-meta">
+                <div class="meta-item"><div class="meta-label">Формат доставки:</div>Оборудование на месте + техническая поддержка</div>
+                <div class="meta-item"><div class="meta-label">Сроки:</div>По договору</div>
+                <div class="meta-item"><div class="meta-label">Цена:</div>15000–25000₽/день (в зависимости от оборудования)</div>
+            </div>
+        </div>
+
+        <div class="service-card">
+            <h4>Индивидуальное наставничество</h4>
+            <strong>Услуга Д3</strong>
+            <p>Полное обучение:</p>
+            <p>✓ FPV полетам</p>
+            <p>✓ Подключению пульта, очков, дрона</p>
+            <p>✓ Сборке дрона</p>
+            <p>✓ Настройке дрона</p>
+            <p>✓ Подбор оборудование / комплектующих</p>
+            <p>✓ Техническое сопровождение (демонстрация, консультация, помощь)</p>
+            <p>Подходит для тех кто заинтересован в быстром развитии по данному направлению и хочет попробовать что-то новое.</p>
+            <div class="service-meta">
+                <div class="meta-item"><div class="meta-label">Формат доставки:</div>Практические занятия + консультации</div>
+                <div class="meta-item"><div class="meta-label">Сроки:</div>По договору</div>
+                <div class="meta-item"><div class="meta-label">Цена:</div>4000–8000₽/занятие (в зависимости от изучаемого материала)</div>
+            </div>
+        </div>
+
+        <div class="service-card">
+            <h4>FPV build - Сборка FPV дрона под ваши цели и задачи</h4>
+            <strong>Услуга Д4</strong>
+            <p>Полная сборка:</p>
+            <p>✓ Подбор комплектующик под разные цели: cinematic, long range, freestile, racing</p>
+            <p>✓ Сборка премиум качества с продумыванием до мелочей "как для себя"</p>
+            <p>✓ Разработка уникальных mount-ов (подвесов)</p>
+            <p>✓ Разработка уникальных карбоновых рам</p>
+            <p>✓ Проведение испытаний для установления точных ТТХ</p>
+            <p>✓ Техническая поддержка при поломках (демонстрация, консультация, помощь)</p>
+            <p>Подходит для тех кто заинтересован в уникальных аппаратах не имеющих аналогов на рынке и нуждается в необходимости обладать исключительными характеристиками для выполнения разного рода задач.</p>
+            <div class="service-meta">
+                <div class="meta-item"><div class="meta-label">Формат доставки:</div>Собранный и протестированный дрон + документация</div>
+                <div class="meta-item"><div class="meta-label">Сроки:</div>По договору</div>
+                <div class="meta-item"><div class="meta-label">Цена:</div>10000–100000₽ (в зависимости от сложности проекта)</div>
+            </div>
+        </div>
+
+    </section>
+
+    <div class="divider-full"></div>
+
+    <!-- FOOTER -->
+    <footer>
+        <h3>FLYING DIAMOND</h3>
+        <p style="margin-bottom: 50px; font-style: italic;">Контролируем то, что другие считают невозможным</p>
+
+        <div class="contacts">
+            <div class="contact-item">
+                <strong>📱 Telegram</strong>
+                <a href="https://t.me/Flying_Diamond">t.me/Flying_Diamond</a>
+            </div>
+            <div class="contact-item">
+                <strong>☎️ Виктор Маслов</strong>
+                <a href="tel:+79138721192">+79138721192</a>
+            </div>
+            <div class="contact-item">
+                <strong>💬 Дмитрий Дроздов</strong>
+                <a href="https://t.me/drozdovhumandevelopment">t.me/drozdovhumandevelopment</a>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>📧 Email: FLYING.DIAMOND@YANDEX.RU</p>
+            <p style="margin-top: 20px;">FLYING DIAMOND © 2024–2026 | Профессиональная аэровидеосъёмка на FPV</p>
+            <p style="margin-top: 10px; font-size: 12px;">Версия 1.0 | Создана с использованием данных из Брендбука и Перечня Услуг</p>
+        </div>
+    </footer>
+
+    <script>
+        const themeToggle = document.getElementById('themeToggle');
+        const html = document.documentElement;
+
+        // Проверяем сохранённую тему или используем системное предпочтение
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        html.setAttribute('data-theme', savedTheme);
+        updateThemeIcon(savedTheme);
+
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            html.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateThemeIcon(newTheme);
+        });
+
+        function updateThemeIcon(theme) {
+            themeToggle.textContent = theme === 'light' ? '🌙' : '☀️';
+        }
+
+        // Smooth scroll для якорей
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
